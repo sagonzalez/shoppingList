@@ -1,0 +1,19 @@
+body{
+	background-image: url("../img/bg1.jpg");	
+	background-repeat: repeat-y;	 
+	background-attachment: fixed;	 
+	background-size: cover;	  
+}
+.white{
+	color:white;
+}
+.well{
+	max-height: 500px;
+	overflow-x: scroll;
+}
+.block-text{
+	text-decoration: line-through;
+}
+.green{
+	color:green;
+}

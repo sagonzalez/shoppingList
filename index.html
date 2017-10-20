@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Shopping List</title>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/icons/css/font-awesome.min.css">
+	<link rel="stylesheet" href="css/custom.css">
+</head>
+<body>
+	<div class="container">
+		<br>
+		<div class="jumbotron">
+			<h1>Shopping List :) with VueJS <img class="img-rounded" height="70px" width="70px" src="img/vuejs-logo.png"></h1>
+
+		</div>
+	</div>
+
+	<div class="row" id="the_row">
+		<div class="container">
+		  	<div class="row col-lg-12">
+			  <div class="col-lg-5"> <!-- with v-model create a link between the input and the var name -->
+			  	<input v-model="newProduct.name" type="text" placeholder="Product name" class="form-control" required id="name">
+			  </div>
+			  <div class="col-lg-2">
+			  	<input v-model.number="newProduct.cost" type="number" placeholder="Cost" class="form-control" min="1" id="cost">
+			  	<br>
+			  </div>
+			  <div class="col-lg-5">
+			  	<button v-on:click="add()" class="btn btn-success"><i class="fa fa-plus" aria-hidden="true"></i></button>	
+			  	<button data-toggle="modal" data-target="#myModal" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i> Delete All</button>	
+			  	<h4 class="white float-right">Total: <span class="green">${{parseFloat(totalAmount).toFixed(2)}}</span></h4>
+			  </div>
+		  	</div>
+		</div>
+
+		<div class="container well">
+		  <br>
+		  <!-- Table -->
+		  <table class="table">
+		   	 <thead class="thead-inverse">
+			    <tr>
+			      <th>#</th>
+			      <th>Product</th>
+			      <th>Cost aprox</th>
+			      <th>Settings</th>
+			    </tr>
+			  </thead>
+			<tbody>
+			   	<!-- data -->
+			   	<tr v-for="product,index in products" class="white"> <!-- v-for incluye la etiqueta de donde se declara --> 
+			   		<td>{{++index}}</td>
+			   		<td v-bind:class="{'block-text' : product.buyed==1}">{{product.name}}</td>
+			   		<td>${{parseFloat(product.cost).toFixed(2)}}</td>
+			   		
+			   		<!-- buttons -->
+			   		<td>
+			   			<button v-on:click="check(product)" class="btn btn-default btn-sm" v-bind:class="{'btn-success': product.buyed==1}">
+				   			<i v-if="product.buyed==1" class="fa fa-check-square" aria-hidden="true"></i>
+				   			<i v-if="product.buyed==0" class="fa fa-square-o" aria-hidden="true"></i>
+			   			</button>
+			   			<button v-if="product.buyed==0" v-on:click="remove(index)" class="btn btn-danger btn-sm"><i class="fa fa-trash" aria-hidden="true"></i></button>
+			   		</td>
+			   	</tr>
+			</tbody>
+		  </table>
+		</div> <!-- container well -->
+
+		<!-- Modal -->
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h5 class="modal-title" id="exampleModalLabel">Delete items</h5>
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span>
+		        </button>
+		      </div>
+		      <div class="modal-body">
+		        Are you sure you want to delete everything?
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+		        <button type="button" v-on:click="removeAll" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i> Yes do it</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+	</div> <!-- the_row -->
+	
+	
+
+
+	<!-- jQuery -->
+	<script type="text/javascript" src="js/jquery.js"></script>
+	<!-- bootstrapJs -->
+	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+	<!-- vuejs -->
+	<script type="text/javascript" src="js/vue.js"></script>
+	<!-- use vue -->
+	<script type="text/javascript" src="js/app.js"></script>
+</body>
+</html>
